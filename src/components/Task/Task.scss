@@ -1,0 +1,135 @@
+.task {
+  padding: 1rem;
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .form-header {
+    .title-input {
+      input {
+        font-size: 1.25rem;
+        font-weight: 500;
+        padding: 0.75rem;
+        border-radius: 8px;
+        border: 1px solid var(--border-color);
+        background: var(--background-color);
+        color: var(--text-color);
+        width: 100%;
+        transition: all 0.2s ease;
+
+        &:focus {
+          border-color: var(--primary-color);
+          box-shadow: 0 0 0 2px rgba(var(--primary-color-rgb), 0.1);
+        }
+      }
+    }
+  }
+
+  .form-body {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .form-section {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--text-color);
+      opacity: 0.8;
+
+      h3 {
+        font-size: 0.875rem;
+        font-weight: 500;
+        margin: 0;
+      }
+    }
+
+    .description-input {
+      textarea {
+        min-height: 100px;
+        padding: 0.75rem;
+        border-radius: 8px;
+        border: 1px solid var(--border-color);
+        background: var(--background-color);
+        color: var(--text-color);
+        resize: vertical;
+        transition: all 0.2s ease;
+
+        &:focus {
+          border-color: var(--primary-color);
+          box-shadow: 0 0 0 2px rgba(var(--primary-color-rgb), 0.1);
+        }
+      }
+    }
+
+    .date-input {
+      padding: 0.75rem;
+      border-radius: 8px;
+      border: 1px solid var(--border-color);
+      background: var(--background-color);
+      color: var(--text-color);
+      cursor: pointer;
+      transition: all 0.2s ease;
+
+      &:focus {
+        border-color: var(--primary-color);
+        box-shadow: 0 0 0 2px rgba(var(--primary-color-rgb), 0.1);
+      }
+    }
+
+    .list-select {
+      padding: 0.75rem;
+      border-radius: 8px;
+      border: 1px solid var(--border-color);
+      background: var(--background-color);
+      color: var(--text-color);
+      cursor: pointer;
+      transition: all 0.2s ease;
+
+      &:focus {
+        border-color: var(--primary-color);
+        box-shadow: 0 0 0 2px rgba(var(--primary-color-rgb), 0.1);
+      }
+
+      option {
+        padding: 0.5rem;
+      }
+
+      .add-list-option {
+        color: var(--primary-color);
+        font-weight: 500;
+      }
+    }
+  }
+
+  .form-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    margin-top: 1rem;
+
+    .cancel-button {
+      background: transparent;
+
+      opacity: 0.8;
+      transition: all 0.2s ease;
+      &:hover {
+        opacity: 1;
+        background: var(--hover-color);
+      }
+    }
+
+    .submit-button {
+      min-width: 120px;
+    }
+  }
+}

@@ -1,0 +1,11 @@
+[data-theme='dark'] {
+  --background-color: var(--background-color-dark);
+  --text-color: #ffffff;
+  --text-muted: #adb5bd;
+  --border-color: #495057;
+  --light-color: #2d2d2d;
+  --icon-color: #e0e0e0;
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
