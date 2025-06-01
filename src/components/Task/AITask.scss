@@ -1,4 +1,4 @@
-.task {
+.ai-task {
   padding: 1rem;
 
   form {
@@ -8,8 +8,8 @@
   }
 
   .form-header {
-    .title-input {
-      input {
+    .prompt-input {
+      textarea {
         font-size: 1.25rem;
         font-weight: 500;
         padding: 0.75rem;
@@ -18,6 +18,8 @@
         background: var(--background-color);
         color: var(--text-color);
         width: 100%;
+        min-height: 100px;
+        resize: vertical;
         transition: all 0.2s ease;
 
         &:focus {
@@ -105,9 +107,26 @@
       }
 
       .add-list-option {
-        color: var(--text-color);
+        color: var(--primary-color);
         font-weight: 500;
       }
+    }
+  }
+
+  .ai-info {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding: 1rem;
+    background: var(--light-color);
+    border-radius: 8px;
+    margin-top: 1rem;
+
+    p {
+      margin: 0;
+      font-size: 0.875rem;
+      color: var(--text-color);
+      opacity: 0.8;
     }
   }
 
@@ -119,7 +138,6 @@
 
     .cancel-button {
       background: transparent;
-
       opacity: 0.8;
       transition: all 0.2s ease;
       &:hover {

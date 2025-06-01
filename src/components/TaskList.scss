@@ -11,9 +11,17 @@
     justify-content: space-between;
     align-items: baseline;
     padding-bottom: 16px;
+
+    .task-actions {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
   }
 
-  .add-task-button {
+  .add-task-button,
+  .add-ai-task-button {
+    font-size: 16px;
     width: fit-content !important;
     justify-content: flex-start;
   }

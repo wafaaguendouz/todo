@@ -13,6 +13,8 @@ interface ListModalProps {
 const ListModal: React.FC<ListModalProps> = ({ closeModal, addNewList }) => {
   const [nameValue, setNameValue] = useState('');
   const [colorValue, setColorValue] = useState('');
+  const [showNameValidation, setShowNameValidation] = useState(false);
+  const [showColorValidation, setShowColorValidation] = useState(false);
 
   const colorOptions = [
     {
@@ -49,9 +51,25 @@ const ListModal: React.FC<ListModalProps> = ({ closeModal, addNewList }) => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setShowNameValidation(true);
+    setShowColorValidation(true);
     if (nameValue && colorValue) {
       addNewList({ name: nameValue, color: colorValue });
     }
+  };
+
+  const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setNameValue(e.target.value);
+    setShowNameValidation(true);
+  };
+
+  const handleColorSelect = (value: string) => {
+    setColorValue(value);
+    setShowColorValidation(true);
+  };
+
+  const handleColorSectionClick = () => {
+    setShowColorValidation(true);
   };
 
   return (
@@ -70,14 +88,17 @@ const ListModal: React.FC<ListModalProps> = ({ closeModal, addNewList }) => {
               label="List name"
               placeholder="Enter list name"
               value={nameValue}
-              onChange={(e) => setNameValue(e.target.value)}
+              onChange={handleNameChange}
               required
               minLength={2}
               className="name-input"
             />
+            {showNameValidation && !nameValue && (
+              <div className="validation-message">Please enter a list name</div>
+            )}
           </div>
 
-          <div className="color-section">
+          <div className="color-section" onClick={handleColorSectionClick}>
             <div className="section-header">
               <Icon name="palette" size={20} />
               <h3>Choose a color</h3>
@@ -89,19 +110,26 @@ const ListModal: React.FC<ListModalProps> = ({ closeModal, addNewList }) => {
                   className={`color-option ${
                     colorValue === option.value ? 'selected' : ''
                   }`}
-                  onClick={() => setColorValue(option.value)}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleColorSelect(option.value);
+                  }}
                   style={{ backgroundColor: option.color }}
                   title={option.label}
                   role="button"
                   tabIndex={0}
                   onKeyDown={(e) => {
                     if (e.key === 'Enter' || e.key === ' ') {
-                      setColorValue(option.value);
+                      e.preventDefault();
+                      handleColorSelect(option.value);
                     }
                   }}
                 />
               ))}
             </div>
+            {showColorValidation && !colorValue && (
+              <div className="validation-message">Please select a color</div>
+            )}
           </div>
 
           <div className="form-footer">
@@ -112,12 +140,7 @@ const ListModal: React.FC<ListModalProps> = ({ closeModal, addNewList }) => {
             >
               Cancel
             </Button>
-            <Button
-              type="submit"
-              color="primary"
-              disabled={!nameValue || !colorValue}
-              className="submit-button"
-            >
+            <Button type="submit" color="primary" className="submit-button">
               Create List
             </Button>
           </div>

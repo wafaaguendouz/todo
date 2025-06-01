@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import type { Task } from '../common/types';
 import TaskComponent from './Task/Task';
+import AITaskComponent from './Task/AITask';
 import Button from './common/Button';
 import IconButton from './common/IconButton';
 import Typography from './common/Typography';
 import './TaskList.scss';
+import { WandSparkles } from 'lucide-react';
 
 interface TaskListProps {
   tasks?: Task[];
@@ -31,6 +33,7 @@ const TaskList: React.FC<TaskListProps> = ({
   title,
 }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isAIModalOpen, setIsAIModalOpen] = useState(false);
   const [currentTask, setCurrentTask] = useState<Task | undefined>(undefined);
 
   const openModal = (task?: Task) => {
@@ -41,6 +44,14 @@ const TaskList: React.FC<TaskListProps> = ({
   const closeModal = () => {
     setCurrentTask(undefined);
     setIsModalOpen(false);
+  };
+
+  const openAIModal = () => {
+    setIsAIModalOpen(true);
+  };
+
+  const closeAIModal = () => {
+    setIsAIModalOpen(false);
   };
 
   const localAddTask = (
@@ -71,16 +82,28 @@ const TaskList: React.FC<TaskListProps> = ({
     <div className="task-list">
       <div className="task-list-header">
         <Typography variant="title4">{title}</Typography>
-        <Button
-          className="add-task-button"
-          color="task"
-          onClick={() => openModal()}
-          aria-label="Add new task"
-          icon="add"
-          iconPosition="prefix"
-        >
-          Add new task
-        </Button>
+        <div className="task-actions">
+          <Button
+            className="add-task-button"
+            color="task"
+            onClick={() => openModal()}
+            aria-label="Add new task"
+            icon="add"
+            iconPosition="prefix"
+          >
+            Add new task
+          </Button>
+          <Button
+            className="add-ai-task-button"
+            color="primary"
+            onClick={openAIModal}
+            aria-label="Add task with AI"
+            icon="sparkles"
+            iconPosition="prefix"
+          >
+            <WandSparkles color="var(--text-color)" size="16px" /> Add with AI
+          </Button>
+        </div>
       </div>
 
       {isModalOpen && (
@@ -90,6 +113,10 @@ const TaskList: React.FC<TaskListProps> = ({
           updateTask={localUpdateTask}
           task={currentTask}
         />
+      )}
+
+      {isAIModalOpen && (
+        <AITaskComponent closeModal={closeAIModal} addTask={localAddTask} />
       )}
 
       {filteredTasks.length > 0 ? (

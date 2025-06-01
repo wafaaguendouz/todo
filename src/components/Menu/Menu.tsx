@@ -8,6 +8,7 @@ import SearchBar from './components/SearchBar';
 import SearchResults from './components/SearchResults';
 import TasksSection from './components/TasksSection';
 import ListsSection from './components/ListsSection';
+import AISection from './components/AISection';
 import './Menu.scss';
 
 const Menu: React.FC = () => {
@@ -17,7 +18,6 @@ const Menu: React.FC = () => {
   const { categories, addNewCategory } = useTaskCategories();
   const { cards } = useStickyWall();
 
-  // Filter tasks based on search query
   const filteredTasks = useMemo(() => {
     if (!searchQuery.trim()) return [];
 
@@ -57,24 +57,24 @@ const Menu: React.FC = () => {
   };
 
   return (
-    <nav className="menu" aria-labelledby="menu-title">
-      <h2 id="menu-title">Menu</h2>
-
+    <div className="menu">
       <SearchBar searchQuery={searchQuery} onSearchChange={setSearchQuery} />
-
-      {searchQuery.trim() && <SearchResults filteredTasks={filteredTasks} />}
-
-      <TasksSection
-        tasks={tasks}
-        countTaskByTimeCategory={countTaskByTimeCategory}
-      />
-
-      <ListsSection categories={categories} onAddNewList={openModal} />
-
+      {searchQuery.trim() ? (
+        <SearchResults filteredTasks={filteredTasks} />
+      ) : (
+        <>
+          <TasksSection
+            tasks={tasks}
+            countTaskByTimeCategory={countTaskByTimeCategory}
+          />
+          <ListsSection categories={categories} onAddNewList={openModal} />
+          <AISection />
+        </>
+      )}
       {isModalOpen && (
         <ListModal closeModal={closeModal} addNewList={handleAddNewList} />
       )}
-    </nav>
+    </div>
   );
 };
 
