@@ -1,7 +1,7 @@
 import React from 'react';
 import type { LucideIcon } from 'lucide-react';
 import {
-  Trash2 as Trash,
+  Trash,
   Edit,
   Plus as Add,
   ChevronRight,

@@ -100,6 +100,7 @@ const TaskList: React.FC<TaskListProps> = ({
                 type="checkbox"
                 className="checkbox"
                 checked={task.isCompleted}
+                aria-label={`Toggle task completion: ${task.title}`}
                 onChange={() => {
                   updateTask({ ...task, isCompleted: !task.isCompleted });
                 }}
