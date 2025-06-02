@@ -11,9 +11,27 @@ import { TaskCategoryProvider } from './contexts/TaskCategoryContext.tsx';
 import { StickyWallProvider } from './contexts/StickyWallContext.tsx';
 import Layout from './components/Layout/Layout';
 import { useTheme } from './hooks/useTheme';
+import DesktopOnlyMessage from './components/DesktopOnlyMessage/DesktopOnlyMessage';
+import { useEffect, useState } from 'react';
 
 function App() {
   const { isDark, setIsDark } = useTheme();
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkScreenSize = () => {
+      setIsMobile(window.innerWidth < 1024);
+    };
+
+    checkScreenSize();
+    window.addEventListener('resize', checkScreenSize);
+
+    return () => window.removeEventListener('resize', checkScreenSize);
+  }, []);
+
+  if (isMobile) {
+    return <DesktopOnlyMessage />;
+  }
 
   return (
     <>

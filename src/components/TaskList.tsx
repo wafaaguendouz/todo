@@ -61,7 +61,9 @@ const TaskList: React.FC<TaskListProps> = ({
     list: string
   ) => {
     addTask(taskTitle, dueDate, description, list);
-    closeModal();
+    if (!isAIModalOpen) {
+      closeModal();
+    }
   };
 
   const localUpdateTask = (updatedTask: Task) => {

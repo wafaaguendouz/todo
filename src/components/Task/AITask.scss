@@ -113,19 +113,95 @@
     }
   }
 
+  .generated-tasks {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 1rem;
+
+    h3 {
+      font-size: 1rem;
+      font-weight: 500;
+      margin: 0;
+      color: var(--text-color);
+    }
+
+    .generated-task {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      padding: 1rem;
+      border-radius: 8px;
+      border: 1px solid var(--border-color);
+      background: var(--background-color-secondary);
+
+      .task-title {
+        input {
+          font-size: 1rem;
+          font-weight: 500;
+          padding: 0.5rem;
+          border-radius: 6px;
+          border: 1px solid var(--border-color);
+          background: var(--background-color);
+          color: var(--text-color);
+          width: 100%;
+          transition: all 0.2s ease;
+
+          &:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 2px rgba(var(--primary-color-rgb), 0.1);
+          }
+        }
+      }
+
+      .task-description {
+        textarea {
+          min-height: 80px;
+          padding: 0.5rem;
+          border-radius: 6px;
+          border: 1px solid var(--border-color);
+          background: var(--background-color);
+          color: var(--text-color);
+          resize: vertical;
+          transition: all 0.2s ease;
+
+          &:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 2px rgba(var(--primary-color-rgb), 0.1);
+          }
+        }
+      }
+
+      .task-date {
+        padding: 0.5rem;
+        border-radius: 6px;
+        border: 1px solid var(--border-color);
+        background: var(--background-color);
+        color: var(--text-color);
+        cursor: pointer;
+        transition: all 0.2s ease;
+
+        &:focus {
+          border-color: var(--primary-color);
+          box-shadow: 0 0 0 2px rgba(var(--primary-color-rgb), 0.1);
+        }
+      }
+    }
+  }
+
   .ai-info {
     display: flex;
     align-items: flex-start;
     gap: 0.75rem;
     padding: 1rem;
-    background: var(--light-color);
     border-radius: 8px;
-    margin-top: 1rem;
+    background: var(--background-color-secondary);
+    color: var(--text-color);
 
     p {
       margin: 0;
       font-size: 0.875rem;
-      color: var(--text-color);
+      line-height: 1.5;
       opacity: 0.8;
     }
   }

@@ -48,15 +48,17 @@ export const TaskProvider: React.FC<TaskProviderProps> = ({ children }) => {
       belongingListName: listName,
       isCompleted: false,
     };
+
+    setTasks((prevTasks) => [...prevTasks, newTask]);
+
     const listCopy = [...categories];
     const listToUpdate = listCopy.find(
       (list) => newTask.belongingListName === list.name
     );
     if (listToUpdate) {
       listToUpdate.taskCount++;
+      setCategories(listCopy);
     }
-    setTasks([...tasks, newTask]);
-    setCategories(listCopy);
   };
 
   // Update a task

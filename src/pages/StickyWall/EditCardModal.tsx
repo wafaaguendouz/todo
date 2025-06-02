@@ -2,7 +2,7 @@ import React from 'react';
 import Typography from '../../components/common/Typography';
 import Button from '../../components/common/Button';
 import Modal from '../../components/common/Modal';
-import type { Card } from '../../types/card';
+import type { Card } from '../../common/types';
 
 interface EditCardModalProps {
   card: Card | null;
