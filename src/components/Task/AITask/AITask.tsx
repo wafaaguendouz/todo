@@ -31,7 +31,7 @@ const AITaskComponent: React.FC<AITaskProps> = ({ closeModal, addTask }) => {
     } else {
       // Create all generated tasks
       for (const task of generatedTasks) {
-        await addTask(task.title, task.dueDate, task.description, task.list);
+        addTask(task.title, task.dueDate, task.description, task.list);
       }
       closeModal();
     }
@@ -88,7 +88,6 @@ const AITaskComponent: React.FC<AITaskProps> = ({ closeModal, addTask }) => {
             />
 
             <div className="ai-info">
-              <Icon name="info" size={20} />
               <p>
                 Our AI will analyze your request and break it down into
                 structured, actionable tasks. You can review and edit the
@@ -109,7 +108,6 @@ const AITaskComponent: React.FC<AITaskProps> = ({ closeModal, addTask }) => {
               type="submit"
               color="primary"
               disabled={!prompt.trim() || isLoading}
-              className="submit-button"
             >
               {isLoading
                 ? 'Generating...'
