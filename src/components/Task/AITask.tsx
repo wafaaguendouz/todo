@@ -3,10 +3,8 @@ import './AITask.scss';
 import Modal from '../common/Modal';
 import Input from '../common/Input';
 import Button from '../common/Button';
-import Icon from '../common/Icon';
 import { useTaskCategories } from '../../hooks/useTaskCategories';
 import ListModal from '../ListModal';
-import type { Task } from '../../common/types';
 
 interface GeneratedTask {
   title: string;
@@ -36,37 +34,21 @@ const AITaskComponent: React.FC<AITaskProps> = ({ closeModal, addTask }) => {
   const generateTasks = async () => {
     setIsLoading(true);
     try {
-      // TODO: Replace with actual AI API call
-      // This is a mock implementation
-      const mockTasks: GeneratedTask[] = [
-        {
-          title: 'Research Berlin attractions',
-          description:
-            'Look up popular tourist spots, museums, and landmarks in Berlin',
-          dueDate: new Date(new Date().setDate(new Date().getDate() + 2)),
-          list: selectedList || 'Personal',
-        },
-        {
-          title: 'Book accommodation',
-          description: 'Find and book a hotel or Airbnb in a central location',
-          dueDate: new Date(new Date().setDate(new Date().getDate() + 3)),
-          list: selectedList || 'Personal',
-        },
-        {
-          title: 'Plan transportation',
-          description:
-            'Research public transport options and book airport transfers',
-          dueDate: new Date(new Date().setDate(new Date().getDate() + 4)),
-          list: selectedList || 'Personal',
-        },
-        {
-          title: 'Create daily itinerary',
-          description: 'Plan daily activities and create a rough schedule',
-          dueDate: new Date(new Date().setDate(new Date().getDate() + 5)),
-          list: selectedList || 'Personal',
-        },
-      ];
-      setGeneratedTasks(mockTasks);
+      const response = await fetch(
+        `/api/generate-tasks?task=${encodeURIComponent(prompt)}`
+      );
+      console.log(response);
+      if (!response.ok) throw new Error('Failed to generate tasks');
+
+      const data = await response.json();
+      // Transform the API response to match our GeneratedTask interface
+      const tasks: GeneratedTask[] = data.map((task: any) => ({
+        title: task.task,
+        description: task.description,
+        dueDate: new Date(task.deadline),
+        list: selectedList || 'Personal',
+      }));
+      setGeneratedTasks(tasks);
     } catch (error) {
       console.error('Error generating tasks:', error);
     } finally {
@@ -147,7 +129,6 @@ const AITaskComponent: React.FC<AITaskProps> = ({ closeModal, addTask }) => {
           <div className="form-body">
             <div className="form-section">
               <div className="section-header">
-                <Icon name="list" size={20} />
                 <h3>List</h3>
               </div>
               <select
@@ -210,7 +191,6 @@ const AITaskComponent: React.FC<AITaskProps> = ({ closeModal, addTask }) => {
             )}
 
             <div className="ai-info">
-              <Icon name="info" size={20} />
               <p>
                 Our AI will analyze your request and break it down into
                 structured, actionable tasks. You can review and edit the
@@ -224,6 +204,7 @@ const AITaskComponent: React.FC<AITaskProps> = ({ closeModal, addTask }) => {
               type="button"
               onClick={closeModal}
               className="cancel-button"
+              color="secondary"
             >
               Cancel
             </Button>
@@ -231,7 +212,6 @@ const AITaskComponent: React.FC<AITaskProps> = ({ closeModal, addTask }) => {
               type="submit"
               color="primary"
               disabled={!prompt.trim() || isLoading}
-              className="submit-button"
             >
               {isLoading
                 ? 'Generating...'

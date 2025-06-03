@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import Modal from './common/Modal';
 import Input from './common/Input';
 import Button from './common/Button';
-import Icon from './common/Icon';
 import './ListModal.scss';
 
 interface ListModalProps {
@@ -100,7 +99,6 @@ const ListModal: React.FC<ListModalProps> = ({ closeModal, addNewList }) => {
 
           <div className="color-section" onClick={handleColorSectionClick}>
             <div className="section-header">
-              <Icon name="palette" size={20} />
               <h3>Choose a color</h3>
             </div>
             <div className="color-options">
@@ -137,10 +135,11 @@ const ListModal: React.FC<ListModalProps> = ({ closeModal, addNewList }) => {
               type="button"
               onClick={closeModal}
               className="cancel-button"
+              color="secondary"
             >
               Cancel
             </Button>
-            <Button type="submit" color="primary" className="submit-button">
+            <Button type="submit" color="primary">
               Create List
             </Button>
           </div>

@@ -1,7 +1,6 @@
 import React from 'react';
 import logo from '../assets/todo.svg';
 import { useNavigate } from 'react-router-dom';
-import IconButton from './common/IconButton';
 import Switch from './common/Switch';
 
 interface HeaderProps {
@@ -58,8 +57,6 @@ const Header: React.FC<HeaderProps> = ({ isDark, handleThemeChange }) => {
         >
           Dark mode
         </Switch>
-        <IconButton icon="notifications" ariaLabel="View notifications" />
-        <IconButton icon="help" ariaLabel="Get help" />
       </div>
     </header>
   );

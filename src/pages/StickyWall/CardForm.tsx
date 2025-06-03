@@ -48,7 +48,7 @@ const CardForm: React.FC<CardFormProps> = ({
           padding: '16px',
         }}
       >
-        <Button type="button" onClick={onClose}>
+        <Button type="button" color="secondary" onClick={onClose}>
           Cancel
         </Button>
         <Button type="submit" color="primary" elevated>

@@ -95,7 +95,6 @@ const TaskComponent: React.FC<TaskProps> = ({
           <div className="form-body">
             <div className="form-section">
               <div className="section-header">
-                <Icon name="description" size={20} />
                 <h3>Description</h3>
               </div>
               <Input
@@ -110,7 +109,6 @@ const TaskComponent: React.FC<TaskProps> = ({
 
             <div className="form-section">
               <div className="section-header">
-                <Icon name="calendar" size={20} />
                 <h3>Due Date</h3>
               </div>
               <input
@@ -123,7 +121,6 @@ const TaskComponent: React.FC<TaskProps> = ({
 
             <div className="form-section">
               <div className="section-header">
-                <Icon name="list" size={20} />
                 <h3>List</h3>
               </div>
               <select
@@ -149,6 +146,7 @@ const TaskComponent: React.FC<TaskProps> = ({
               type="button"
               onClick={closeModal}
               className="cancel-button"
+              color="secondary"
             >
               Cancel
             </Button>
@@ -156,7 +154,6 @@ const TaskComponent: React.FC<TaskProps> = ({
               type="submit"
               color="primary"
               disabled={!validateSubmit(title, date)}
-              className="submit-button"
             >
               {task ? 'Save Changes' : 'Add Task'}
             </Button>

@@ -34,7 +34,7 @@ const ListsSection: React.FC<ListsSectionProps> = ({
         ))}
         <MenuListItem
           name="Add new list"
-          iconName="add"
+          iconName="plus"
           taskCount={0}
           onClick={onAddNewList}
           className="add-list-item"

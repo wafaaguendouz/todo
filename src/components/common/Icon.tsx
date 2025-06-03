@@ -7,6 +7,7 @@ import {
   ChevronRight,
   StickyNote as Note,
   Calendar as Today,
+  Plus,
 } from 'lucide-react';
 
 interface IconProps {
@@ -24,6 +25,7 @@ const iconComponents: { [key: string]: LucideIcon } = {
   'chevron-right': ChevronRight,
   note: Note,
   today: Today,
+  plus: Plus,
 };
 
 const Icon: React.FC<IconProps> = ({

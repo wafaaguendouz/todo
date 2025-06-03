@@ -6,7 +6,7 @@ import Button from './common/Button';
 import IconButton from './common/IconButton';
 import Typography from './common/Typography';
 import './TaskList.scss';
-import { WandSparkles } from 'lucide-react';
+import { Plus, WandSparkles } from 'lucide-react';
 
 interface TaskListProps {
   tasks?: Task[];
@@ -90,9 +90,9 @@ const TaskList: React.FC<TaskListProps> = ({
             color="task"
             onClick={() => openModal()}
             aria-label="Add new task"
-            icon="add"
             iconPosition="prefix"
           >
+            <Plus color="var(--text-color)" size="14px" />
             Add new task
           </Button>
           <Button
@@ -100,10 +100,9 @@ const TaskList: React.FC<TaskListProps> = ({
             color="primary"
             onClick={openAIModal}
             aria-label="Add task with AI"
-            icon="sparkles"
             iconPosition="prefix"
           >
-            <WandSparkles color="var(--text-color)" size="16px" /> Add with AI
+            <WandSparkles color="white" size="14px" /> Add with AI
           </Button>
         </div>
       </div>

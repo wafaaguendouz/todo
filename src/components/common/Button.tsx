@@ -53,11 +53,20 @@ const Button: React.FC<ButtonProps> = ({
           ? 'var(--light-color)'
           : 'var(--background-color)'
         : 'var(--primary-color)',
-    color: color === 'task' ? 'var(--text-color)' : undefined,
+    color:
+      color === 'task'
+        ? 'var(--text-color)'
+        : color === 'primary'
+        ? 'white'
+        : color === 'secondary'
+        ? 'var(--text-color)'
+        : undefined,
+
     boxShadow: elevated ? 'var(--shadow-sm)' : 'none',
     border: color === 'task' ? '1px solid var(--border-color)' : 'none',
-    fontSize: color === 'task' ? '1rem' : undefined,
+    fontSize: '14px',
     width: color === 'task' ? '100%' : undefined,
+    fontWeight: color === 'task' ? 'bold' : undefined,
     justifyContent: color === 'task' ? 'flex-start' : undefined,
     transition: 'background-color 0.2s, border-color 0.2s, transform 0.2s',
     transform: isActive

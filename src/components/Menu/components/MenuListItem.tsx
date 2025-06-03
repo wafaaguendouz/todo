@@ -50,12 +50,7 @@ const MenuListItem: React.FC<MenuListItemProps> = ({
           }}
         />
       ) : (
-        <Icon
-          name={iconName}
-          size={24}
-          color="var(--text-color)"
-          className="icon"
-        />
+        <Icon name={iconName} color="var(--text-color)" className="icon" />
       )}
       <div className="content">
         <span className="menu-link">{name}</span>
