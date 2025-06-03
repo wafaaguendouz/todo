@@ -18,42 +18,21 @@ export default async function handler(req: Request) {
     return new Response('No task provided', { status: 400 });
   }
 
-  try {
-    const { object } = await generateObject({
-      model: openai('o3-mini'),
-      providerOptions: {
-        openai: { reasoningEffort: 'medium' },
-      },
-      output: 'array',
-      schema: z.object({
-        task: z.string().describe('The task to be broken down'),
-        description: z.string().describe('The description of the task'),
-        deadline: z.date().describe('The deadline for the task'),
-      }),
-      prompt: task,
-      system:
-        'Break down the following task to a set of individual tasks with defined deadlines and descriptions',
-    });
+  const result = await generateObject({
+    model: openai('o3-mini'),
+    providerOptions: {
+      openai: { reasoningEffort: 'medium' },
+    },
+    output: 'array',
+    schema: z.object({
+      task: z.string().describe('The task to be broken down'),
+      description: z.string().describe('The description of the task'),
+      deadline: z.date().describe('The deadline for the task'),
+    }),
+    prompt: task,
+    system:
+      'Break down the following task to a set of individual tasks with defined deadlines and descriptions',
+  });
 
-    // Transform the response to match the frontend's expected format
-    const transformedTasks = object.map((task: any) => ({
-      title: task.task,
-      description: task.description,
-      dueDate: task.deadline,
-    }));
-
-    return new Response(JSON.stringify(transformedTasks), {
-      status: 200,
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
-  } catch (error) {
-    return new Response(JSON.stringify({ error: 'Failed to generate tasks' }), {
-      status: 500,
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
-  }
+  return result.toJsonResponse();
 }
