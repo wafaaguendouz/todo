@@ -19,10 +19,7 @@ export default async function handler(req: Request) {
   }
 
   const result = await generateObject({
-    model: openai('o3-mini'),
-    providerOptions: {
-      openai: { reasoningEffort: 'medium' },
-    },
+    model: openai('gpt-4o-mini', { structuredOutputs: true }),
     output: 'array',
     schema: z.object({
       task: z.string().describe('The task to be broken down'),
