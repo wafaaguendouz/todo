@@ -3,7 +3,6 @@ import './AITask.scss';
 import Modal from '../../common/Modal';
 import Input from '../../common/Input';
 import Button from '../../common/Button';
-import Icon from '../../common/Icon';
 import { useTaskCategories } from '../../../hooks/useTaskCategories';
 import ListModal from '../../ListModal';
 import type { AITaskProps } from './types';

@@ -37,17 +37,17 @@ const AITaskComponent: React.FC<AITaskProps> = ({ closeModal, addTask }) => {
       const response = await fetch(
         `/api/generate-tasks?task=${encodeURIComponent(prompt)}`
       );
-      console.log(response);
       if (!response.ok) throw new Error('Failed to generate tasks');
 
       const data = await response.json();
-      // Transform the API response to match our GeneratedTask interface
-      const tasks: GeneratedTask[] = data.map((task: any) => ({
+
+      const tasks: GeneratedTask[] = data.tasks.map((task: any) => ({
         title: task.task,
         description: task.description,
         dueDate: new Date(task.deadline),
         list: selectedList || 'Personal',
       }));
+
       setGeneratedTasks(tasks);
     } catch (error) {
       console.error('Error generating tasks:', error);
