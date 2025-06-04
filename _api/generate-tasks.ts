@@ -8,7 +8,7 @@ export const edge = true;
 // Stream the response
 export const streaming = true;
 
-// This function is called via /api/generate-tasks?task=TASK_VALUE
+// API route: /api/generate-tasks?task=TASK_VALUE
 export default async function handler(req: Request) {
   const { searchParams } = new URL(req.url);
 
@@ -20,15 +20,18 @@ export default async function handler(req: Request) {
 
   const result = await generateObject({
     model: openai('gpt-4o-mini', { structuredOutputs: true }),
-    output: 'array',
-    schema: z.object({
-      task: z.string().describe('The task to be broken down'),
-      description: z.string().describe('The description of the task'),
-      deadline: z.date().describe('The deadline for the task'),
-    }),
-    prompt: task,
+    schema: z.array(
+      z.object({
+        task: z.string().describe('The subtask title'),
+        description: z.string().describe('Details about the subtask'),
+        deadline: z
+          .string()
+          .describe('Deadline in ISO 8601 format (e.g., 2025-06-10T00:00:00Z)'),
+      })
+    ),
+    prompt: `Break down the following task into subtasks with clear deadlines and descriptions:\n\n"${task}"`,
     system:
-      'Break down the following task to a set of individual tasks with defined deadlines and descriptions',
+      'You are a task planning assistant. For the given task, return an array of subtasks in structured JSON. Each subtask should have a title, a description, and a deadline in ISO 8601 string format.',
   });
 
   return result.toJsonResponse();
