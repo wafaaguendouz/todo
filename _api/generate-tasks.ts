@@ -27,7 +27,7 @@ export default async function handler(req: Request) {
       }),
       prompt: `Break down the following task into subtasks with clear deadlines and descriptions:\n\n"${task}"`,
       system:
-        'You are a task planning assistant. For the given task, return an array of subtasks in structured JSON. Each subtask should have a title, a description, and a deadline in ISO 8601 string format.',
+        'You are a task planning assistant. For the given task, return an array of subtasks in structured JSON. Each subtask should have a title, a description, and a deadline after today in ISO 8601 string format.',
     });
 
     return result.toJsonResponse();
